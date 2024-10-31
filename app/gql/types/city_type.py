@@ -1,10 +1,19 @@
-from graphene import ObjectType, String, Int, List
+from graphene import ObjectType, String, Int, List, Float, Field
 
-class CountryType(ObjectType):
+
+class CityType(ObjectType):
+    city_id = Int()
+    city_name = String()
     country_id = Int()
-    country_name = String()
-    cities = List(lambda: CityType)
+    latitude = Float()
+    longitude = Float()
+    country = Field('app.gql.types.country_type.CountryType')
+    targets = List('app.gql.types.target_type.TargetType')
 
     @staticmethod
-    def resolve_cities(root, info):
-        return City.query.filter(City.country_id == root.country_id).all()
+    def resolve_country(root, info, city_id):
+        pass
+
+    @staticmethod
+    def resolve_targets(root, info):
+        pass
