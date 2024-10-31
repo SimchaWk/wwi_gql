@@ -1,19 +1,18 @@
-from graphene import ObjectType, String, Int, List, Float, Field
+from graphene import ObjectType, Int, List, Float, Date
 
 
-class CityType(ObjectType):
-    city_id = Int()
-    city_name = String()
-    country_id = Int()
-    latitude = Float()
-    longitude = Float()
-    country = Field(lambda: CountryType)
-    targets = List(lambda: TargetType)
-
-    @staticmethod
-    def resolve_country(root, info):
-        return Country.query.filter(Country.country_id == root.country_id).first()
+class MissionType(ObjectType):
+    mission_id = Int()
+    mission_date = Date()
+    airborne_aircraft = Float()
+    attacking_aircraft = Float()
+    bombing_aircraft = Float()
+    aircraft_returned = Float()
+    aircraft_failed = Float()
+    aircraft_damaged = Float()
+    aircraft_lost = Float()
+    targets = List('app.gql.types.target_type.TargetType')
 
     @staticmethod
     def resolve_targets(root, info):
-        return Target.query.filter(Target.city_id == root.city_id).all()
+        pass
