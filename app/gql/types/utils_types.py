@@ -17,4 +17,8 @@ class AttackResultsType(ObjectType):
 class AttackResultsByTypeType(ObjectType):
     mission_id = Int()
     mission_date = Date()
-    count = Float()
+    returned_aircraft = Float()
+    failed_aircraft = Float()
+    damaged_aircraft = Float()
+    lost_aircraft = Float()
+    target_type = String()
